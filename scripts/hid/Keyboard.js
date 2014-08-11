@@ -1,7 +1,6 @@
-var Keyboard = function() {
+window.Keyboard = function() {
  document.addEventListener("keydown", Keyboard.onKeyDown, false);
  document.addEventListener("keyup", Keyboard.onKeyUp, false);
- console.log("Initializing Keyboard");
 };
 
 Keyboard.state = {};

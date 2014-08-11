@@ -1,4 +1,4 @@
-var Screen = function(state, canvas, context) {
+window.Screen = function(state, canvas, context) {
   this.state = state;
   this.canvas = canvas;
   this.context = context;
