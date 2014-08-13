@@ -1,24 +1,19 @@
+console.log("main begin")
 define([
-    "PlayState",
-    "PauseState",
-    "BackgroundScreen",
-    "TextScreen",
+    "App",
   ], function() {
-    var canvas, context;
-  
-  function init() {
-    canvas = document.getElementById("myCanvas");
-    context = canvas.getContext('2d');
 
+  var Application = new AppConfig();
+  //Application.prototype = new AppConfig();
+  Application.prototype = Object.create(AppConfig.prototype);
+  Application.prototype.init = function() {
     setupDatGui();
-    
     setPlayState();
-    updateLoop(0);
   }
+  var canvas, context;
 
-  function updateLoop(updateTime) {
+  Application.prototype.update = function(updateTime) {
     state.updateLoop(updateTime);
-    requestAnimationFrame(updateLoop);
   }
   function setPlayState() {
     state = new PlayState(canvas, context);
@@ -36,13 +31,13 @@ define([
       state.removeScreen(screenInc++)
   }
   function setupDatGui() {
-    var AppConfig = function() {
+    var GuiConfig = function() {
       this.setPlayState = setPlayState;
       this.setPauseState = setPauseState;
       this.addTextScreen = addTextScreen;
       this.removeTextScreen = removeTextScreen;
     };
-    var appConfig = new AppConfig();
+    var guiConfig = new GuiConfig();
     
     var gui  = new dat.GUI();
     gui.add(appConfig, 'setPlayState');
@@ -51,5 +46,6 @@ define([
     gui.add(appConfig, 'removeTextScreen');
   }
 
-  init();
+  window.App = new SST(Application);
+  window.App.start();
 });
