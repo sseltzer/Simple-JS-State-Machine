@@ -9,7 +9,7 @@ define(["Screen"], function() {
     context.font="20px Georgia";
     var dispTime = parseInt(updateTime, 10);
     context.fillText("Runtime: " + dispTime, 10, 20);
-    context.fillText("Keyboard: " + state.hid.keyboard.getState(), 10, 50);
-    context.fillText("PlayState", 10, 80);
+    context.fillText("Keyboard: " + this.state.hid.keyboard.getState(), 10, 50);
+    context.fillText(this.state.name, 10, 80);
   }
 });

@@ -1,51 +1,72 @@
 console.log("main begin")
 define([
     "App",
+    "PlayState", "PauseState", "PauseBackgroundScreen", "BackgroundScreen"
   ], function() {
 
   var Application = new AppConfig();
   //Application.prototype = new AppConfig();
   Application.prototype = Object.create(AppConfig.prototype);
-  Application.prototype.init = function() {
+  Application.init = function() {
+    this.canvas = SSTCanvas;
+    this.context = SSTContext;
     setupDatGui();
-    setPlayState();
-  }
-  var canvas, context;
 
-  Application.prototype.update = function(updateTime) {
-    state.updateLoop(updateTime);
+    this.playState = new PlayState(Application.canvas, Application.context);
+    this.pauseState = new PauseState(Application.canvas, Application.context);
+    this.setPlayState();
   }
-  function setPlayState() {
-    state = new PlayState(canvas, context);
+  var canvas, Application;
+
+  Application.update = function(updateTime) {
+    this.state.updateLoop(updateTime);
   }
-  function setPauseState() {      
-    state = new PauseState(canvas, context);
+  Application.setPlayState = function() {
+    Application.state = Application.playState;
   }
+  Application.setPauseState = function() {
+    Application.state = Application.pauseState;
+  }
+  Application.screenCounters = {
+    "play" : 1,
+    "pause" : 1
+  };
   var screenInc = 1;
-  function addTextScreen() {
-    state.addScreen(new TextScreen(state, canvas, context))
+  Application.addTextScreen = function() {
+    var type = (Application.state instanceof PlayState) ? 'play' : 'pause';
+    var last = Application.screenCounters[type];
+    if ((Application.state.screenStack[last] instanceof TextScreen)) return;
+    
+    Application.state.addScreen(new TextScreen(Application.state, Application.canvas, Application.context))
+
+    Application.screenCounters[type]++;
   }
-  function removeTextScreen() {
-    console.log((state instanceof PlayState))
-    if (state instanceof PlayState)
-      state.removeScreen(screenInc++)
+  Application.removeTextScreen = function() {
+    var type = (Application.state instanceof PlayState) ? 'play' : 'pause';
+    var last = Application.screenCounters[type];
+    if (!(Application.state.screenStack[last] instanceof TextScreen)) return;
+
+    Application.state.removeScreen(last);
+
+    Application.screenCounters[type]--;
   }
   function setupDatGui() {
     var GuiConfig = function() {
-      this.setPlayState = setPlayState;
-      this.setPauseState = setPauseState;
-      this.addTextScreen = addTextScreen;
-      this.removeTextScreen = removeTextScreen;
+      this.setPlayState = Application.setPlayState;
+      this.setPauseState = Application.setPauseState;
+      this.addTextScreen = Application.addTextScreen;
+      this.removeTextScreen = Application.removeTextScreen;
     };
     var guiConfig = new GuiConfig();
     
     var gui  = new dat.GUI();
-    gui.add(appConfig, 'setPlayState');
-    gui.add(appConfig, 'setPauseState');
-    gui.add(appConfig, 'addTextScreen');
-    gui.add(appConfig, 'removeTextScreen');
+    gui.add(guiConfig, 'setPlayState');
+    gui.add(guiConfig, 'setPauseState');
+    gui.add(guiConfig, 'addTextScreen');
+    gui.add(guiConfig, 'removeTextScreen');
   }
 
+  window.Application = Application;
   window.App = new SST(Application);
   window.App.start();
 });

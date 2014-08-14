@@ -30,7 +30,8 @@ define(["HID"], function() {
     return this.screenStack.length;
   }
   State.prototype.removeScreen = function(index) {
-    delete this.screenStack[index];
+    //delete this.screenStack[index];
+    this.screenStack.splice(index, 1);
   }
 
 });
