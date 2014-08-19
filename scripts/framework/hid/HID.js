@@ -1,4 +1,3 @@
-console.log("HID")
 define(["Keyboard"], function() {
   console.log("HID loaded")
   window.HID = function() {

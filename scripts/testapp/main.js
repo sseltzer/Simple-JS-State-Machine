@@ -1,20 +1,22 @@
 console.log("main begin")
 define([
     "App",
-    "PlayState", "PauseState", "PauseBackgroundScreen", "BackgroundScreen"
+    "PlayState", "PauseState", "PauseBackgroundScreen", "BackgroundScreen", "PlayScreen"
   ], function() {
 
   var Application = new AppConfig();
   //Application.prototype = new AppConfig();
   Application.prototype = Object.create(AppConfig.prototype);
   Application.init = function() {
+    SSTCanvas.width = window.innerWidth;
+    SSTCanvas.height = window.innerHeight;
     this.canvas = SSTCanvas;
     this.context = SSTContext;
     setupDatGui();
 
     this.playState = new PlayState(Application.canvas, Application.context);
     this.pauseState = new PauseState(Application.canvas, Application.context);
-    this.setPlayState();
+    this.setPauseState();
   }
   var canvas, Application;
 

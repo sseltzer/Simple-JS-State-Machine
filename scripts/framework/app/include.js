@@ -1,4 +1,3 @@
-console.log("framework include start");
 require.config({
   paths: {
     "HID"                    : route("hid/HID"),
@@ -20,6 +19,4 @@ define([
   "SST",
   "AppConfig"
 ], function() {
-  console.log("framework done loading");
 });
-console.log("framework include end");
