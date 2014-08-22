@@ -1,11 +1,11 @@
 define(["Screen"], function() {
-  window.BackgroundScreen = function(state, canvas, context) {
-    Screen.apply(this, [state, canvas, context]);
+  window.BackgroundScreen = function(state, appconfig) {
+    Screen.apply(this, [state, appconfig]);
   }
   BackgroundScreen.prototype = Object.create(Screen.prototype);
   BackgroundScreen.prototype.draw = function(updateTime) {
-    var context = this.context;
-    var canvas = this.canvas;
+    var context = this.appconfig.context;
+    var canvas = context.canvas;
     context.fillStyle = "#000000";
     context.fillRect(0, 0, canvas.width, canvas.height);
 

@@ -1,6 +1,6 @@
 define(["Screen"], function() {
-  window.PlayScreen = function(state, canvas, context) {
-    Screen.apply(this, [state, canvas, context]);
+  window.PlayScreen = function(state, appconfig) {
+    Screen.apply(this, [state, appconfig]);
 
     this.scene = new THREE.Scene(); 
     this.camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000); 

@@ -2,19 +2,18 @@ define([
     "include"
   ], function() {
     
-    window.SST = function(appconfig) {
+    window.CanvasSM = function(appconfig, canvasName) {
       this.appconfig = appconfig;
-      appconfig.canvas = this.canvas;
+      appconfig.canvas = document.getElementById(canvasName);
+      appconfig.context = appconfig.canvas.getContext('2d');
     }
-    window.SSTCanvas = document.getElementById("myCanvas");
-    window.SSTContext = SSTCanvas.getContext('2d');
 
-    SST.prototype.start = function() {
+    CanvasSM.prototype.start = function() {
       this.appconfig.init();
       requestAnimationFrame(this.updateLoop.bind(this));
     }
 
-    SST.prototype.updateLoop = function(updateTime) {
+    CanvasSM.prototype.updateLoop = function(updateTime) {
       this.appconfig.update(updateTime);
       requestAnimationFrame(this.updateLoop.bind(this));
   }

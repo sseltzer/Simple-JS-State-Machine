@@ -1,10 +1,10 @@
 define(["Screen"], function() {
-  window.TextScreen = function(state, canvas, context) {
-    Screen.apply(this, [state, canvas, context]);
+  window.TextScreen = function(state, appconfig) {
+    Screen.apply(this, [state, appconfig]);
   }
   TextScreen.prototype = Object.create(Screen.prototype);
   TextScreen.prototype.draw = function(updateTime) {
-    var context = this.context;
+    var context = this.appconfig.context;
     context.fillStyle = "#FFFFFF";
     context.font="20px Georgia";
     var dispTime = parseInt(updateTime, 10);

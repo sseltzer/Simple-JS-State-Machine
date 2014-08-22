@@ -1,11 +1,11 @@
 define(["Screen"], function() {
-  window.PauseBackgroundScreen = function(state, canvas, context) {
-    Screen.apply(this, [state, canvas, context]);
+  window.PauseBackgroundScreen = function(state, appconfig) {
+    Screen.apply(this, [state, appconfig]);
   }
   PauseBackgroundScreen.prototype = Object.create(Screen.prototype);
   PauseBackgroundScreen.prototype.draw = function(updateTime) {
-    var context = this.context;
-    var canvas = this.canvas;
+    var context = this.appconfig.context;
+    var canvas = context.canvas;
     context.fillStyle = "#000000";
     context.fillRect(0, 0, canvas.width, canvas.height);
 

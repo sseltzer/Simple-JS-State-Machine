@@ -1,7 +1,6 @@
-window.Screen = function(state, canvas, context) {
+window.Screen = function(state, appconfig) {
   this.state = state;
-  this.canvas = canvas;
-  this.context = context;
+  this.appconfig = appconfig;
   this.init();
 };
 Screen.prototype.init = function() {

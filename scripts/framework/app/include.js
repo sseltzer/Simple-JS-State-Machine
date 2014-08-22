@@ -4,7 +4,8 @@ require.config({
     "Keyboard"               : route("hid/Keyboard"),
     "State"                  : route("state/State"),
     "Screen"                 : route("screen/Screen"),
-    "SST"                    : route("app/sst"),
+    "CanvasSM"               : route("app/CanvasSM"),
+    "ThreejsSM"              : route("app/ThreejsSM"),
     "AppConfig"              : route("app/appconfig")
   }
 });
@@ -16,7 +17,8 @@ define([
   "Keyboard",
   "State",
   "Screen",
-  "SST",
+  "CanvasSM",
+  "ThreejsSM",
   "AppConfig"
 ], function() {
 });

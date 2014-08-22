@@ -1,7 +1,6 @@
 define(["HID"], function() {
-  window.State = function(canvas, context) {
-    this.canvas = canvas;
-    this.context = context;
+  window.State = function(appconfig) {
+    this.appconfig = appconfig;
     this.hid = new HID();
     this.screenStack = [];
     this.init();

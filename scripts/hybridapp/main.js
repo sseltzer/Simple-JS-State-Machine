@@ -5,20 +5,16 @@ define([
   ], function() {
 
   var Application = new AppConfig();
-  //Application.prototype = new AppConfig();
   Application.prototype = Object.create(AppConfig.prototype);
   Application.init = function() {
-    SSTCanvas.width = window.innerWidth;
-    SSTCanvas.height = window.innerHeight;
-    this.canvas = SSTCanvas;
-    this.context = SSTContext;
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
     setupDatGui();
 
-    this.playState = new PlayState(Application.canvas, Application.context);
-    this.pauseState = new PauseState(Application.canvas, Application.context);
+    this.playState = new PlayState(this);
+    this.pauseState = new PauseState(this);
     this.setPauseState();
   }
-  var canvas, Application;
 
   Application.update = function(updateTime) {
     this.state.updateLoop(updateTime);
@@ -33,7 +29,6 @@ define([
     "play" : 1,
     "pause" : 1
   };
-  var screenInc = 1;
   Application.addTextScreen = function() {
     var type = (Application.state instanceof PlayState) ? 'play' : 'pause';
     var last = Application.screenCounters[type];
@@ -69,6 +64,6 @@ define([
   }
 
   window.Application = Application;
-  window.App = new SST(Application);
+  window.App = new CanvasSM(Application, 'myCanvas');
   window.App.start();
 });
