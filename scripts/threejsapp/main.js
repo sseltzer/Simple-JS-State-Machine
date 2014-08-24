@@ -3,10 +3,11 @@ define([
     "App",
     "AssetLoader",
     "PlayState", 
-    "PauseState", 
-    "PauseBackgroundScreen", 
-    "BackgroundScreen", 
-    "PlayScreen"
+    "PauseState",
+    "PauseBackground", 
+    "PauseCube",
+    "PlayBackground", 
+    "PlayCube"
   ], function() {
 
   var Application = new AppConfig();
@@ -15,6 +16,8 @@ define([
   Application.init = function() {
     this.playState = new PlayState(this);
     this.pauseState = new PauseState(this);
+    console.log("test: " + this.playState === this.pauseState)
+    console.log("test: " + this.playState.scene === this.pauseState.scene)
     this.setPauseState();
     setupDatGui();
   }
