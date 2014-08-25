@@ -1,6 +1,5 @@
 define(["Screen"], function() {
   window.PauseCube = function(state, appconfig) {
-    console.log("PauseCube")
     Screen.apply(this, [state, appconfig]);
     var geometry = new THREE.BoxGeometry(1,1,1); 
     

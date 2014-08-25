@@ -1,7 +1,6 @@
 define(["Screen"], function() {
   window.PlayBackground = function(state, appconfig) {
     Screen.apply(this, [state, appconfig]);
-    console.log("PlayBackground")
     this.path = 'assets/textures/';
     this.urls = [
       this.path + 'brown1.png', //back
@@ -28,12 +27,11 @@ define(["Screen"], function() {
 
     // create skybox mesh
     this.skybox = new THREE.Mesh(new THREE.BoxGeometry(20000, 20000, 20000), this.skyBoxMaterial);
-
     this.state.scene.add(this.skybox);
-    console.log(state.nameStr)
   }
   PlayBackground.prototype = Object.create(Screen.prototype);
   PlayBackground.prototype.draw = function(updateTime) {
+    this.shader.uniforms['tCube'].value = this.cubemap;
     this.appconfig.renderer.render(this.state.scene, this.appconfig.camera);
   }
 });

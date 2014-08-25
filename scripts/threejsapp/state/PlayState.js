@@ -5,7 +5,6 @@ define(["State", "PlayBackground", "PlayCube"], function() {
   }
   PlayState.prototype = Object.create(State.prototype);
   PlayState.prototype.init = function() {
-    console.log(this.scene)
     this.scene = new THREE.Scene();
     this.addScreen(new PlayBackground(this, this.appconfig));
     this.addScreen(new PlayCube(this, this.appconfig));

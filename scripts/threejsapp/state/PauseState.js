@@ -5,7 +5,6 @@ define(["State", "PauseBackground", "PauseCube"], function() {
   }
   PauseState.prototype = Object.create(State.prototype);
   PauseState.prototype.init = function() {
-    console.log(this.scene)
     this.scene = new THREE.Scene();
     this.addScreen(new PauseBackground(this, this.appconfig));
     this.addScreen(new PauseCube(this, this.appconfig));

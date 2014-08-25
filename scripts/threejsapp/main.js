@@ -1,4 +1,3 @@
-console.log("main begin")
 define([
     "App",
     "AssetLoader",
@@ -16,8 +15,6 @@ define([
   Application.init = function() {
     this.playState = new PlayState(this);
     this.pauseState = new PauseState(this);
-    console.log("test: " + this.playState === this.pauseState)
-    console.log("test: " + this.playState.scene === this.pauseState.scene)
     this.setPauseState();
     setupDatGui();
   }
@@ -47,10 +44,8 @@ define([
 
   window.AssetLoader = new AssetLoader(begin);
   function begin() {
-    console.log("begin called");
     window.Application = Application;
     window.App = new ThreejsSM(Application);
     window.App.start();
   }
-  console.log('done')
 });

@@ -1,7 +1,6 @@
 define(["Screen"], function() {
   window.PauseBackground = function(state, appconfig) {
     Screen.apply(this, [state, appconfig]);
-    console.log("PauseBackground")
     this.path = 'assets/textures/';
     this.urls = [
       this.path + 'blue1.png', //back
@@ -25,15 +24,14 @@ define(["Screen"], function() {
       depthWrite: false,
       side: THREE.BackSide
     });
-
+    
     // create skybox mesh
     this.skybox = new THREE.Mesh(new THREE.BoxGeometry(20000, 20000, 20000), this.skyBoxMaterial);
-
     this.state.scene.add(this.skybox);
-    console.log(this.state.nameStr)
   }
   PauseBackground.prototype = Object.create(Screen.prototype);
   PauseBackground.prototype.draw = function(updateTime) {
+    this.shader.uniforms['tCube'].value = this.cubemap;
     this.appconfig.renderer.render(this.state.scene, this.appconfig.camera);
   }
 });

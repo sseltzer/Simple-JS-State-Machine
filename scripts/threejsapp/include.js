@@ -1,5 +1,3 @@
-console.log("app include start");
-
 var frameworkFolder = "framework/";
 var appFolder = "threejsapp/";
 var vendorFolder = "vendor/";
@@ -28,5 +26,3 @@ require(["datgui", "threejs"], function() {
     require(["main"]);
   });
 });
-
-console.log("app include done");

@@ -1,7 +1,6 @@
 define(["Screen"], function() {
   window.PlayCube = function(state, appconfig) {
     Screen.apply(this, [state, appconfig]);
-    console.log("PlayCube")
     var geometry = new THREE.BoxGeometry(1,1,1); 
     
     var texture = THREE.ImageUtils.loadTexture('assets/textures/crate.png');
