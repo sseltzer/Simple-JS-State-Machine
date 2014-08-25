@@ -13,7 +13,7 @@ define(["Screen"], function() {
     this.cubemap = THREE.ImageUtils.loadTextureCube(this.urls); // load textures
     this.cubemap.format = THREE.RGBFormat;
 
-    this.shader = THREE.ShaderLib['cube']; // init cube shader from built-in lib
+    this.shader = THREE.ShaderLib['cube'] // init cube shader from built-in lib
     this.shader.uniforms['tCube'].value = this.cubemap; // apply textures to shader
 
     // create shader material
