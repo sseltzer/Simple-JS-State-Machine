@@ -1,12 +1,12 @@
-window.Screen = function(state, appconfig) {
-  this.state = state;
-  this.appconfig = appconfig;
-  this.init();
-};
-Screen.prototype.init = function() {
-}
-Screen.prototype.update = function(updateTime) {
-}
-Screen.prototype.draw = function(updateTime) {
-  var context = this.context;
-}
+(function () {
+  SSMApp.Screen = function(state, appconfig) {
+    this.state = state;
+    this.appconfig = appconfig;
+    this.init();
+  };
+  var obj = SSMApp.Screen;
+
+  obj.prototype.init = function() {};
+  obj.prototype.update = function(updateTime) {};
+  obj.prototype.draw = function(updateTime) {};
+}());

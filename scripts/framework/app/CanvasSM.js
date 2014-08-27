@@ -1,20 +1,18 @@
-define([
-    "include"
-  ], function() {
-    
-    window.CanvasSM = function(appconfig, canvasName) {
-      this.appconfig = appconfig;
-      appconfig.canvas = document.getElementById(canvasName);
-      appconfig.context = appconfig.canvas.getContext('2d');
-    }
+(function () {
+  SSMApp.CanvasSM = function(appconfig, canvasName) {
+    this.appconfig = appconfig;
+    appconfig.canvas = document.getElementById(canvasName);
+    appconfig.context = appconfig.canvas.getContext('2d');
+  };
+  var obj = SSMApp.CanvasSM;
 
-    CanvasSM.prototype.start = function() {
-      this.appconfig.init();
-      requestAnimationFrame(this.updateLoop.bind(this));
-    }
+  obj.prototype.start = function() {
+    this.appconfig.init();
+    requestAnimationFrame(this.updateLoop.bind(this));
+  };
 
-    CanvasSM.prototype.updateLoop = function(updateTime) {
-      this.appconfig.update(updateTime);
-      requestAnimationFrame(this.updateLoop.bind(this));
-  }
-});
+  obj.prototype.updateLoop = function(updateTime) {
+    this.appconfig.update(updateTime);
+    requestAnimationFrame(this.updateLoop.bind(this));
+  };
+}());

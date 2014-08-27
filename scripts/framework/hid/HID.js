@@ -1,9 +1,13 @@
-define(["Keyboard"], function() {
-  window.HID = function() {
-    this.keyboard = new Keyboard();
-    //this.mouse = new Mouse();
-  };
-  HID.prototype.update = function() {
-    this.keyboard.update();
-  }
-});
+(function () {
+  define(["Keyboard", "Mouse"], function() {
+    SSMApp.HID = function() {
+      this.keyboard = new SSMApp.Keyboard();
+      this.mouse = new SSMApp.Mouse();
+    };
+    var obj = SSMApp.HID;
+    obj.prototype.update = function() {
+      this.keyboard.update();
+      this.mouse.update();
+    }
+  });
+}());
