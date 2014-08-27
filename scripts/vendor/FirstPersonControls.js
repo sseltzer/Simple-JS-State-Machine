@@ -49,6 +49,7 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
 	this.viewHalfX = 0;
 	this.viewHalfY = 0;
+	this.lockCamera = false;
 
 	if ( this.domElement !== document ) {
 
@@ -121,7 +122,6 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 	};
 
 	this.onMouseMove = function ( event ) {
-
 		if ( this.domElement === document ) {
 
 			this.mouseX = event.pageX - this.viewHalfX;
@@ -158,7 +158,7 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 			case 70: /*F*/ this.moveDown = true; break;
 
 			case 81: /*Q*/ this.freeze = !this.freeze; break;
-
+			case 69: this.lockCamera = !this.lockCamera; break;
 		}
 
 	};
@@ -217,6 +217,8 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
 		if ( this.moveUp ) this.object.translateY( actualMoveSpeed );
 		if ( this.moveDown ) this.object.translateY( - actualMoveSpeed );
+
+		if (this.lockCamera) return;
 
 		var actualLookSpeed = delta * this.lookSpeed;
 
