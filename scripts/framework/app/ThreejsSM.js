@@ -6,6 +6,7 @@
     appconfig.renderer = new THREE.WebGLRenderer();
     appconfig.renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(appconfig.renderer.domElement);
+    SSMApp.lastTime = 0;
   }
   var obj = SSMApp.ThreejsSM || {};
 
@@ -15,6 +16,8 @@
   }
 
   obj.prototype.updateLoop = function(updateTime) {
+    SSMApp.timeDelta = updateTime - SSMApp.lastTime;
+    SSMApp.lastTime = updateTime;
     this.appconfig.update(updateTime);
     requestAnimationFrame(this.updateLoop.bind(this));
   }

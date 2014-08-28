@@ -13,6 +13,7 @@
         "HID"                    : route("hid/HID"),
         "Keyboard"               : route("hid/Keyboard"),
         "Mouse"                  : route("hid/Mouse"),
+        "FPC"                    : route("hid/FirstPersonControls"),
         "State"                  : route("state/State"),
         "Screen"                 : route("screen/Screen"),
         "CanvasSM"               : route("app/CanvasSM"),
@@ -24,6 +25,7 @@
     }
     require([
       "HID",
+      "FPC",
       "State",
       "Screen",
       "CanvasSM",

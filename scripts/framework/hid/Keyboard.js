@@ -1,5 +1,6 @@
 (function () {
   SSMApp.Keyboard = function() {
+    console.log("Keyboard run");
    document.addEventListener("keydown", SSMApp.Keyboard.onKeyDown, false);
    document.addEventListener("keyup", SSMApp.Keyboard.onKeyUp, false);
   };

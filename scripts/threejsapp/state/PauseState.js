@@ -11,6 +11,8 @@
       this.scene = new THREE.Scene();
       this.addScreen(new SSMApp.PauseBackground(this, this.appconfig));
       this.addScreen(new SSMApp.PauseCube(this, this.appconfig));
+
+      this.controls = new SSMApp.FirstPersonControls(this.hid, this.appconfig.camera);
       /*
       this.clock = new THREE.Clock();
       this.controls = new THREE.FirstPersonControls(this.appconfig.camera);
@@ -21,6 +23,7 @@
     }
     obj.prototype.update = function(updateTime) {
       SSMApp.State.prototype.update.apply(this);
+      this.controls.update(updateTime)
       //this.controls.update(this.clock.getDelta());
     };
   });

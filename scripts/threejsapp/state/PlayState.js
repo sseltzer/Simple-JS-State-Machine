@@ -11,16 +11,16 @@
       this.scene = new THREE.Scene();
       this.addScreen(new SSMApp.PlayBackground(this, this.appconfig));
       this.addScreen(new SSMApp.PlayCube(this, this.appconfig));
-
+/*
       this.clock = new THREE.Clock();
       this.controls = new THREE.FirstPersonControls(this.appconfig.camera);
       this.controls.movementSpeed = 10;
       this.controls.lookSpeed = 0.125;
-      this.controls.lookVertical = true;
+      this.controls.lookVertical = true;*/
     }
     obj.prototype.update = function(updateTime) {
       SSMApp.State.prototype.update.apply(this);
-      this.controls.update(this.clock.getDelta());
+      //this.controls.update(this.clock.getDelta());
     };
   });
 }());
