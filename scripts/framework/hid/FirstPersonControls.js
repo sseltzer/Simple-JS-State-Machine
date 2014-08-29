@@ -21,6 +21,7 @@
       if (keyboard.down('d'))     camera.translateX( speed);
       if (keyboard.down('Space')) camera.translateY( speed);
       if (keyboard.down('Shift')) camera.translateY(-speed);
+      if (keyboard.down('f')) keyboard.requestFullScreen();
 
       var mouse = this.hid.mouse;
       this.lastMousePosition = this.mousePosition;

@@ -31,25 +31,33 @@
    191: "/", 192: "`", 219: "[", 220: "\\", 221: "]",
    222: "'"
   };
-
+  obj.fullScreenReq = false;
   obj.onKeyUp = function (event) {
-   if (!obj.state[event.keyCode]) obj.state[event.keyCode] = {up: false, down: false, pressed:false, dirty:false};
-   obj.state[event.keyCode] = {up: true, down: false, pressed:obj.state[event.keyCode].pressed, dirty:true};
+    if (!obj.state[event.keyCode]) obj.state[event.keyCode] = {up: false, down: false, pressed:false, dirty:false};
+    obj.state[event.keyCode] = {up: true, down: false, pressed:obj.state[event.keyCode].pressed, dirty:true};
+    if (obj.fullScreenReq) {
+      var element = document.documentElement;
+      var rfs = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen;
+      rfs.call(element);
+      var rpl = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
+      rpl.call(element);
+      obj.fullScreenReq = false;
+    }
   };
   obj.onKeyDown = function (event) {
-   if (!obj.state[event.keyCode]) obj.state[event.keyCode] = {up: false, down: false, pressed:false, dirty:false};
-   obj.state[event.keyCode] = {up: false, down: true, pressed:obj.state[event.keyCode].pressed, dirty:true};
+    if (!obj.state[event.keyCode]) obj.state[event.keyCode] = {up: false, down: false, pressed:false, dirty:false};
+    obj.state[event.keyCode] = {up: false, down: true, pressed:obj.state[event.keyCode].pressed, dirty:true};
   };
   obj.getKeyByValue = function(value) {
-   for (var key in obj.key) if (obj.key[key] == value) return key;
+    for (var key in obj.key) if (obj.key[key] == value) return key;
   };
 
   obj.prototype.update = function() {
-   for (var key in obj.state) {
-     var keyObj = obj.state[key];
-     keyObj.pressed = (keyObj.up && keyObj.dirty);
-     keyObj.dirty = false;
-   }
+    for (var key in obj.state) {
+      var keyObj = obj.state[key];
+      keyObj.pressed = (keyObj.up && keyObj.dirty);
+      keyObj.dirty = false;
+    }
   };
   obj.prototype.getState = function() {
    var stateStr = "";
@@ -73,5 +81,8 @@
   obj.prototype.pressed = function(value) {
    if (!obj.state[obj.getKeyByValue(value)]) return false;
    return obj.state[obj.getKeyByValue(value)].pressed;
+  };
+  obj.prototype.requestFullScreen = function() {
+    obj.fullScreenReq = true;
   };
 }());
