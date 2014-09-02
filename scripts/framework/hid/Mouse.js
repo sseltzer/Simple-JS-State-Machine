@@ -6,11 +6,12 @@
     document.addEventListener("mousemove", SSMApp.Mouse.onMouseMove, false);
     SSMApp.Mouse.lastPosition = {x: 0, y: 0};
     SSMApp.Mouse.position = {x: 0, y: 0};
-    
+    SSMApp.Mouse.movement = {x: 0, y: 0};
   };
   var obj = SSMApp.Mouse;
 
   obj.onMouseUpEvents = [];
+  obj.onMouseMoveEvents = [];
   obj.state = {};
   obj.key = {
    0: "LMB",
@@ -22,14 +23,6 @@
    if (!obj.state[event.button]) obj.state[event.button] = {up: false, down: false, pressed:false, dirty:false};
    obj.state[event.button] = {up: true, down: false, pressed:obj.state[event.button].pressed, dirty:true};
    obj.callEvents(obj.onMouseUpEvents, event);
-   if (obj.fullScreenReq) {
-    var element = document.documentElement;
-    var rfs = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen;
-    rfs.call(element);
-    var rpl = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
-    rpl.call(element);
-    obj.fullScreenReq = false;
-   }
   };
   obj.onMouseDown = function (event) {
    if (!obj.state[event.button]) obj.state[event.button] = {up: false, down: false, pressed:false, dirty:false};
@@ -51,9 +44,13 @@
    return obj.state[obj.getKeyByValue(value)].pressed;
   };
 
-  obj.onMouseMove = function(event) {
-    SSMApp.Mouse.lastPosition = SSMApp.Mouse.position;
-    SSMApp.Mouse.position = {x: event.pageX, y: event.pageY};
+  obj.onMouseMove = function(event, e2, e3) {
+    obj.lastPosition = obj.position;
+    obj.position = {x: event.pageX, y: event.pageY};
+    if (!SSMApp.pointerLock) obj.movement = {x: obj.position.x - obj.lastPosition.x, y: obj.position.y - obj.lastPosition.y};
+    else obj.movement = {x: event.mozMovementX, y: event.mozMovementY};
+    console.log(obj.movement)
+    obj.callEvents(obj.onMouseMoveEvents, event);
   };
 
   obj.prototype.getMouseMoveDistance = function() {
@@ -75,6 +72,14 @@
   };
   obj.prototype.removeOnMouseUpEvent = function(index) {
     obj.onMouseUpEvents.splice(index, 1);
+  }
+  obj.prototype.addOnMouseMoveEvent = function(callback) {
+    obj.onMouseMoveEvents.push(callback);
+    console.log(obj.onMouseMoveEvents)
+    return obj.onMouseMoveEvents.length;
+  };
+  obj.prototype.removeOnMouseMoveEvent = function(index) {
+    obj.onMouseMoveEvents.splice(index, 1);
   }
   obj.callEvents = function(events, event) {
     for (var i = 0; i < events.length; ++i) {
