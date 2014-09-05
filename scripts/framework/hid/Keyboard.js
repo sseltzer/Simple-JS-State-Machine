@@ -39,18 +39,27 @@
       var element = document.documentElement;
       var rfs = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen;
       var rpl = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
+      document.exitPointerLock = document.exitPointerLock || document.mozExitPointerLock || document.webkitExitPointerLock;
+      document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
+      var width, height;
       if (!SSMApp.pointerLock) {
         rfs.call(element);
         rpl.call(element);
-        obj.fullScreenReq = false;
         SSMApp.pointerLock = true;
+        width = screen.width;
+        height = screen.height;
       } else {
-        document.exitPointerLock = document.exitPointerLock || document.mozExitPointerLock || document.webkitExitPointerLock;
         document.exitPointerLock();
-        document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
         document.exitFullscreen();
         SSMApp.pointerLock = false;
+        width = window.innerWidth;
+        height = window.innerHeight;
       }
+      var camera = window.Application.camera;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      window.Application.renderer.setSize(width, height);
+      obj.fullScreenReq = false;
     }
   };
   obj.onKeyDown = function (event) {
