@@ -49,7 +49,7 @@
     obj.position = {x: event.pageX, y: event.pageY};
     if (!SSMApp.pointerLock) obj.movement = {x: obj.position.x - obj.lastPosition.x, y: obj.position.y - obj.lastPosition.y};
     else obj.movement = {x: event.mozMovementX, y: event.mozMovementY};
-    console.log(obj.movement)
+    //console.log(obj.movement)
     obj.callEvents(obj.onMouseMoveEvents, event);
   };
 

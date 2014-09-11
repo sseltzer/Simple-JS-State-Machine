@@ -12,6 +12,7 @@
       "PauseBackground"        : route(appFolder       + "screen/pausestate/PauseBackground"),
       "PauseCube"              : route(appFolder       + "screen/pausestate/PauseCube"),
       "TextScreen"             : route(appFolder       + "screen/pausestate/TextScreen"),
+      "ParticleScreen"         : route(appFolder       + "screen/pausestate/ParticleScreen"),
       "PlayBackground"         : route(appFolder       + "screen/playstate/PlayBackground"),
       "PlayCube"               : route(appFolder       + "screen/playstate/PlayCube"),
       "PlayState"              : route(appFolder       + "state/PlayState"),

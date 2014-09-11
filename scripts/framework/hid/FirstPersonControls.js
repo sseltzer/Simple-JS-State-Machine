@@ -28,6 +28,9 @@
       if (keyboard.down('Space')) camera.translateY( speed);
       if (keyboard.down('Shift')) camera.translateY(-speed);
       if (keyboard.down('f')) keyboard.requestFullScreen();
+      if (keyboard.pressed('e')) {
+        Application.state.addParticle();
+      };
     };
   });
 }());

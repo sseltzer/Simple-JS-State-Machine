@@ -18,6 +18,10 @@
         "Screen"                 : route("screen/Screen"),
         "CanvasSM"               : route("app/CanvasSM"),
         "ThreejsSM"              : route("app/ThreejsSM"),
+        "Entity"                 : route("entity/Entity"),
+        "MovableEntity"          : route("entity/MovableEntity"),
+        "Particle"               : route("entity/Particle"),
+        "ParticleGenerator"      : route("particle/ParticleGenerator"),
       }
     });
     function route(path) {
@@ -30,6 +34,7 @@
       "Screen",
       "CanvasSM",
       "ThreejsSM",
+      "ParticleGenerator",
     ], function() {
     });
   };

@@ -5,6 +5,7 @@
     appconfig.camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 20000);
     appconfig.renderer = new THREE.WebGLRenderer();
     appconfig.renderer.setSize(window.innerWidth, window.innerHeight);
+    //appconfig.renderer.domElement
     document.body.appendChild(appconfig.renderer.domElement);
     SSMApp.lastTime = 0;
   }
