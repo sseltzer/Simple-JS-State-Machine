@@ -1,5 +1,5 @@
 (function () {
-  define(["PlayBackground", "PlayCube"], function() {
+  define(["PlayBackground", "Earth"], function() {
     SSMApp.PlayState = function(appconfig) {
       this.nameStr = "PlayState";
       SSMApp.State.apply(this, [appconfig]);
@@ -10,7 +10,7 @@
     obj.prototype.init = function() {
       this.scene = new THREE.Scene();
       this.addScreen(new SSMApp.PlayBackground(this, this.appconfig));
-      this.addScreen(new SSMApp.PlayCube(this, this.appconfig));
+      this.addScreen(new SSMApp.Earth(this, this.appconfig));
       this.controls = new SSMApp.FirstPersonControls(this.hid, this.appconfig.camera);
     }
     obj.prototype.update = function(updateTime) {
