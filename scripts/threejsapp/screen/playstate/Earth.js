@@ -2,12 +2,13 @@
   SSMApp.Earth = function(state, appconfig) {
     SSMApp.Screen.apply(this, [state, appconfig]);
 
-    var light = new THREE.AmbientLight( 0x555555 )
+    //var light = new THREE.AmbientLight( 0x555555 )
+    var light = new THREE.AmbientLight( 0xFFFFFF )
     this.state.scene.add( light )
     this.earthMesh    = SSMApp.Earth.createEarth();
     this.state.scene.add(this.earthMesh);
     this.cloudMesh    = SSMApp.Earth.createEarthCloud();
-    this.state.scene.add(this.cloudMesh);
+    //this.state.scene.add(this.cloudMesh);
   }
   var obj = SSMApp.Earth;
   
@@ -19,13 +20,13 @@
   }
 
 SSMApp.Earth.createEarth  = function(){
-var geometry  = new THREE.SphereGeometry(0.5, 32, 32)
+var geometry  = new THREE.SphereGeometry(5, 32, 32)
 var material  = new THREE.MeshPhongMaterial({
-map : THREE.ImageUtils.loadTexture('assets/textures/earthmap1k.jpg'),
-bumpMap : THREE.ImageUtils.loadTexture('assets/textures/earthbump1k.jpg'),
-bumpScale : 0.05,
-specularMap : THREE.ImageUtils.loadTexture('assets/textures/earthspec1k.jpg'),
-specular  : new THREE.Color('grey'),
+map : THREE.ImageUtils.loadTexture('assets/textures/mars_1k_color.jpg'),
+//bumpMap : THREE.ImageUtils.loadTexture('assets/textures/earthbump4k.jpg'),
+//bumpScale : 0.05,
+//specularMap : THREE.ImageUtils.loadTexture('assets/textures/earthspec4k.jpg'),
+//specular  : new THREE.Color('grey'),
 })
 var mesh  = new THREE.Mesh(geometry, material)
 return mesh 
@@ -35,6 +36,8 @@ SSMApp.Earth.createEarthCloud = function(){
 var canvasResult  = document.createElement('canvas')
 canvasResult.width  = 1024
 canvasResult.height = 512
+//canvasResult.width  = 4000
+//canvasResult.height = 2000
 var contextResult = canvasResult.getContext('2d') 
 // load earthcloudmap
 var imageMap  = new Image();
@@ -55,7 +58,7 @@ canvasTrans.width = imageTrans.width
 canvasTrans.height  = imageTrans.height
 var contextTrans  = canvasTrans.getContext('2d')
 contextTrans.drawImage(imageTrans, 0, 0)
-var dataTrans = contextTrans.getImageData(0, 0, canvasTrans.width, canvasTrans.height)
+var dataTrans = contextTrans.getImageData(0, 0, canvasTrans.width, canvasTransss.height)
 // merge dataMap + dataTrans into dataResult
 var dataResult  = contextMap.createImageData(canvasMap.width, canvasMap.height)
 for(var y = 0, offset = 0; y < imageMap.height; y++){
@@ -73,7 +76,7 @@ material.map.needsUpdate = true;
 imageTrans.src  = 'assets/textures/earthcloudmaptrans.jpg';
 }, false);
 imageMap.src  = 'assets/textures/earthcloudmap.jpg';
-var geometry  = new THREE.SphereGeometry(0.51, 32, 32)
+var geometry  = new THREE.SphereGeometry(5.25, 32, 32)
 var material  = new THREE.MeshPhongMaterial({
 map : new THREE.Texture(canvasResult),
 side  : THREE.DoubleSide,
